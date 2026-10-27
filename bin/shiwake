@@ -1,0 +1,33 @@
+#!/bin/sh
+[ -n "${ZSH_VERSION:-}" ] && emulate sh
+
+sw_self="$0"
+case "${sw_self}" in
+  */*) ;;
+  *) sw_self="$(command -v -- "${sw_self}")" ;;
+esac
+SW_LIB="$(cd "${sw_self%/*}/../lib" && pwd)" || exit 1
+
+# shellcheck source=SCRIPTDIR/../lib/core.sh
+. "${SW_LIB}/core.sh"
+# shellcheck source=SCRIPTDIR/../lib/cli.sh
+. "${SW_LIB}/cli.sh"
+# shellcheck source=SCRIPTDIR/../lib/doctor.sh
+. "${SW_LIB}/doctor.sh"
+# shellcheck source=SCRIPTDIR/../lib/args.sh
+. "${SW_LIB}/args.sh"
+# shellcheck source=SCRIPTDIR/../lib/sort.sh
+. "${SW_LIB}/sort.sh"
+# shellcheck source=SCRIPTDIR/../lib/run.sh
+. "${SW_LIB}/run.sh"
+
+sw_main() {
+  case "${1:-}" in
+    help | -h | --help) sw_usage ;;
+    version | -V | --version) sw_cli_version ;;
+    doctor) sw_doctor ;;
+    *) sw_start "$@" ;;
+  esac
+}
+
+sw_main "$@"

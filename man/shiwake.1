@@ -1,0 +1,70 @@
+.TH SHIWAKE 1 "2026-10-27" "shiwake" "User Commands"
+.SH NAME
+shiwake \- sort the files of a folder into A to Z subfolders by first letter
+.SH SYNOPSIS
+.B shiwake
+.br
+.B shiwake
+.RI [ options ] " " [ folder ]
+.br
+.B shiwake doctor
+.br
+.B shiwake version
+.br
+.B shiwake help
+.SH DESCRIPTION
+.B shiwake
+moves every file at the top of a folder into a subfolder named for the first
+letter of the file's name, creating each subfolder the first time it is
+needed. Letters go to
+.B A
+through
+.BR Z ,
+whatever their case. Any other first character, such as a digit, a symbol or
+an accented letter, sends the file to
+.BR # .
+.PP
+Symbolic links move like files and are never followed. Subfolders, hidden
+files and special files stay where they are. A file is never moved over one of
+the same name: it stays, and shiwake prints a warning naming it. When a file
+or a link already stands where a letter folder belongs, the files for that
+letter stay where they are.
+.PP
+Before moving anything, shiwake prints the folder and how many files go into
+how many subfolders. Without a folder on a terminal it asks for one, offering
+the current folder; outside a terminal it sorts the current folder.
+.SH COMMANDS
+.TP
+.B doctor
+List the tools shiwake needs, with the flavor and version of each. Exits
+non-zero only when one is missing.
+.TP
+.B version
+Print the version and the platform.
+.TP
+.B help
+Print the usage page.
+.SH OPTIONS
+.TP
+.B \-\-dry\-run
+List every move and change nothing.
+.PP
+.B \-\-
+ends the options. A folder named help, doctor or version is sorted by giving
+its path, such as
+.IR ./help .
+.SH EXIT STATUS
+0 when every file that could move did, including runs where some files stayed
+because their folder already holds a file of the same name. 1 when a file
+could not be moved, a letter folder could not be made, or the arguments are
+wrong.
+.SH EXAMPLES
+.TP
+.B shiwake ~/Downloads
+Sort the Downloads folder.
+.TP
+.B shiwake \-\-dry\-run .
+Show what sorting the current folder would do.
+.SH SEE ALSO
+.BR mv (1),
+.BR mkdir (1)

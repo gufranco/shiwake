@@ -1,0 +1,21 @@
+#compdef shiwake
+
+_shiwake() {
+  local -a commands
+  commands=(
+    'doctor:check the tools shiwake needs'
+    'version:print the version'
+    'help:print usage'
+  )
+
+  if (( CURRENT == 2 )) && [[ "${words[2]}" != -* ]]; then
+    _alternative 'commands:command:_describe command commands' 'folders:folder:_files -/'
+    return
+  fi
+
+  _arguments \
+    '--dry-run[list every move and change nothing]' \
+    '*:folder:_files -/'
+}
+
+_shiwake "$@"
