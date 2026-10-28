@@ -68,7 +68,7 @@ sw_show() {
   sw_sh_bucket="$1"
   shift
   for sw_sh_file in "$@"; do
-    printf '%s -> %s/\n' "${sw_sh_file}" "${sw_sh_bucket}"
+    sw_say 0 "${sw_sh_file} -> ${sw_sh_bucket}/"
   done
   SW_MOVED=$((SW_MOVED + $#))
   sw_filled "${sw_sh_bucket}" "$#"

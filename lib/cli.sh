@@ -5,7 +5,7 @@
 
 sw_usage() {
   cat <<'USAGE'
-shiwake - sort the files of a folder into A to Z subfolders by their first letter
+shiwake - sort the files of a folder into A to Z subfolders by first letter
 
 usage:
   shiwake                      ask for the folder, then sort it
@@ -36,7 +36,7 @@ USAGE
 }
 
 sw_cli_hint() {
-  printf "%s: %s. run '%s help' for usage.\n" "${SW_PROG}" "$1" "${SW_PROG}" >&2
+  sw_say 0 "${SW_PROG}: $1. run '${SW_PROG} help' for usage." >&2
 }
 
 sw_cli_version() {
@@ -46,7 +46,7 @@ sw_cli_version() {
 }
 
 sw_interactive() {
-  [ "${SW_INTERACTIVE:-}" = 1 ] && return 0
+  [ "${SHIWAKE_INTERACTIVE:-}" = 1 ] && return 0
   [ -t 0 ]
 }
 

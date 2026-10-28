@@ -23,7 +23,7 @@ from_folder() {
 
 @test "help prints the usage page" {
   # Arrange
-  local first="shiwake - sort the files of a folder into A to Z subfolders by their first letter"
+  local first="shiwake - sort the files of a folder into A to Z subfolders by first letter"
 
   # Act
   run sw_test_run help
@@ -116,7 +116,7 @@ from_folder() {
 @test "the tool runs by its bare name from inside its own folder" {
   # Arrange
   local -a shell_words
-  read -r -a shell_words <<<"${SW_SHELL:-sh}"
+  read -r -a shell_words <<<"${SHIWAKE_TEST_SHELL:-sh}"
   cd "${REPO_DIR}/bin" || return 1
 
   # Act
@@ -266,7 +266,7 @@ from_folder() {
   local answer="${TARGET}"
 
   # Act
-  SW_INTERACTIVE=1 run sw_test_run --dry-run <<<"${answer}"
+  SHIWAKE_INTERACTIVE=1 run sw_test_run --dry-run <<<"${answer}"
 
   # Assert
   [[ "${status}" -eq 0 ]]
@@ -279,7 +279,7 @@ from_folder() {
   local answer=""
 
   # Act
-  SW_INTERACTIVE=1 run from_folder "${TARGET}" sw_test_run --dry-run <<<"${answer}"
+  SHIWAKE_INTERACTIVE=1 run from_folder "${TARGET}" sw_test_run --dry-run <<<"${answer}"
 
   # Assert
   [[ "${status}" -eq 0 ]]
@@ -293,7 +293,7 @@ from_folder() {
   local answer="~/target"
 
   # Act
-  SW_INTERACTIVE=1 HOME="${WORK}" run sw_test_run --dry-run <<<"${answer}"
+  SHIWAKE_INTERACTIVE=1 HOME="${WORK}" run sw_test_run --dry-run <<<"${answer}"
 
   # Assert
   [[ "${status}" -eq 0 ]]
@@ -305,7 +305,7 @@ from_folder() {
   local answer="~"
 
   # Act
-  SW_INTERACTIVE=1 HOME="${TARGET}" run sw_test_run --dry-run <<<"${answer}"
+  SHIWAKE_INTERACTIVE=1 HOME="${TARGET}" run sw_test_run --dry-run <<<"${answer}"
 
   # Assert
   [[ "${status}" -eq 0 ]]
@@ -317,7 +317,7 @@ from_folder() {
   local empty=""
 
   # Act
-  SW_INTERACTIVE=1 run sw_test_run < <(printf '%s' "${empty}")
+  SHIWAKE_INTERACTIVE=1 run sw_test_run < <(printf '%s' "${empty}")
 
   # Assert
   [[ "${status}" -eq 1 ]]

@@ -16,7 +16,8 @@ sw_choose_folder() {
 sw_summary() {
   sw_su_files="$(sw_plural "${SW_FOUND}" file)"
   sw_su_folders="$(sw_plural "${SW_FOLDERS}" folder)"
-  printf '\nFolder: %s\n' "${SW_DIR}"
+  printf '\n'
+  sw_say 8 "Folder: ${SW_DIR}"
   printf 'Plan:   %s into %s named for their first letter\n' "${sw_su_files}" "${sw_su_folders}"
   if [ "${SW_DRY_RUN}" = yes ]; then
     printf '        dry run: list each move and change nothing\n'
@@ -44,7 +45,7 @@ sw_start() {
   sw_open_folder || return 1
   sw_scan tally
   if [ "${SW_FOUND}" -eq 0 ]; then
-    printf 'Nothing to sort in %s.\n' "${SW_DIR}"
+    sw_say 0 "Nothing to sort in ${SW_DIR}."
     return 0
   fi
   sw_summary

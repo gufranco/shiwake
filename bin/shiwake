@@ -1,6 +1,10 @@
 #!/bin/sh
 [ -n "${ZSH_VERSION:-}" ] && emulate sh
 
+for sw_inherited in $(env | sed -n 's/^\(SW_[A-Za-z0-9_]*\)=.*/\1/p'); do
+  unset "${sw_inherited}"
+done
+
 sw_self="$0"
 case "${sw_self}" in
   */*) ;;

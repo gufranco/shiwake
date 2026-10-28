@@ -368,7 +368,7 @@ exit 1"
 exec \"\$REAL\" \"\$@\""
 
   # Act
-  SW_BATCH=2 run sw_test_run "${TARGET}"
+  SHIWAKE_BATCH=2 run sw_test_run "${TARGET}"
 
   # Assert
   [[ "${status}" -eq 0 ]]
@@ -382,7 +382,7 @@ exec \"\$REAL\" \"\$@\""
   sw_test_files "${TARGET}" T t1 t2 t3 t4
 
   # Act
-  SW_BATCH=2 run sw_test_run "${TARGET}"
+  SHIWAKE_BATCH=2 run sw_test_run "${TARGET}"
 
   # Assert
   [[ "${status}" -eq 1 ]]

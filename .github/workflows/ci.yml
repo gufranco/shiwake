@@ -125,7 +125,7 @@ jobs:
         run: sh bin/shiwake doctor
       - name: Run the suites under ${{ matrix.shell }}
         env:
-          SW_SHELLS: ${{ matrix.shell }}
+          SHIWAKE_TEST_SHELLS: ${{ matrix.shell }}
         run: sh test/run-matrix.sh
 
   coverage:

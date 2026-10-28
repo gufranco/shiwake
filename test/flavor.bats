@@ -23,7 +23,7 @@ fake_tool() {
 flavor_of() {
   local tool
   tool="$(fake_tool "${WORK}/bin/$1" "$2")"
-  SW_OS="${3:-Darwin}" sw_test_call sw_tool_flavor "${tool}"
+  SHIWAKE_OS="${3:-Darwin}" sw_test_call sw_tool_flavor "${tool}"
 }
 
 @test "GNU coreutils reads as gnu with its version" {
@@ -109,13 +109,13 @@ flavor_of() {
   tool="$(fake_tool "${WORK}/uutils-coreutils/uubin/mv" "unrecognized option '--version'")"
 
   # Act
-  SW_OS=Darwin run sw_test_call sw_tool_flavor "${tool}"
+  SHIWAKE_OS=Darwin run sw_test_call sw_tool_flavor "${tool}"
 
   # Assert
   [[ "${output}" == "uutils" ]]
 }
 
-@test "the host system decides when SW_OS is not set" {
+@test "the host system decides when SHIWAKE_OS is not set" {
   # Arrange
   local tool expected=unknown
   tool="$(fake_tool "${WORK}/bin/mv" "usage: mv source target")"

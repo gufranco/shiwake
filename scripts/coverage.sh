@@ -28,7 +28,7 @@ wrapper="${wrapper_dir}/bashcov-shell"
 } >"${wrapper}"
 chmod 0755 "${wrapper}"
 
-SW_SHELL="${wrapper}" bats "${root}/test"
+SHIWAKE_TEST_SHELL="${wrapper}" bats "${root}/test"
 
 cd "${root}"
 python3 scripts/coverage-gate.py '/(bin/shiwake|lib/[a-z]+\.sh)\Z' "${minimum}" coverage/.resultset.json

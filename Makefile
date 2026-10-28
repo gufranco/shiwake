@@ -20,7 +20,7 @@ lint:
 	mandoc -T lint man/shiwake.1
 
 test:
-	SW_SHELLS=sh sh test/run-matrix.sh
+	SHIWAKE_TEST_SHELLS=sh sh test/run-matrix.sh
 
 test-all:
 	sh test/run-matrix.sh

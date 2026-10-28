@@ -19,7 +19,7 @@
 
 </div>
 
-コマンドは一つ、テストは 59 件、シェルモジュールは 7 個。POSIX システム以外に必要なものはありません。`shiwake` は「仕分け」です。郵便局が手紙を振り分けるように、ファイルをそれぞれの箱に振り分けます。姉妹ツールの [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome)、[yakitsuke](https://github.com/gufranco/yakitsuke) は、ディスクの書き込み、ディスクの消去、ビデオ CD の作成を行います。
+コマンドは一つ、テストは 69 件、シェルモジュールは 7 個。POSIX システム以外に必要なものはありません。`shiwake` は「仕分け」です。郵便局が手紙を振り分けるように、ファイルをそれぞれの箱に振り分けます。姉妹ツールの [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome)、[yakitsuke](https://github.com/gufranco/yakitsuke) は、ディスクの書き込み、ディスクの消去、ビデオ CD の作成を行います。
 
 ---
 
@@ -119,7 +119,7 @@ Linux の GNU coreutils と uutils coreutils、macOS 標準のツール、その
 | コマンド | 説明 |
 |:--------|:------------|
 | `make lint` | すべてのスクリプト、テスト、補完に ShellCheck、man ページに mandoc |
-| `make test` | システムの `sh` で 59 件の `bats` テスト |
+| `make test` | システムの `sh` で 69 件の `bats` テスト |
 | `make test-all` | すべてのシェルで同じテスト。macOS では bash と zsh の両方の版を含みます |
 | `make coverage` | bashcov の行カバレッジと、CI が強制する 100% のゲート |
 

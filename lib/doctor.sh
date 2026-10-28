@@ -4,7 +4,13 @@
 . "${SW_LIB:?}/state.sh"
 
 sw_doctor_row() {
-  printf '%-18s %-8s %s\n' "$1" "$2" "$3"
+  sw_dw_line="$(printf '%-18s %-8s %s' "$1" "$2" "$3")"
+  if [ "${#sw_dw_line}" -le "${SW_WIDTH}" ] || ! sw_terminal; then
+    printf '%s\n' "${sw_dw_line}"
+    return 0
+  fi
+  printf '%-18s %s\n' "$1" "$2"
+  printf '  %s\n' "$3" | sw_wrap 2
 }
 
 sw_flavor_version() {
@@ -22,7 +28,7 @@ sw_tool_flavor() {
   sw_tf_raw="$("$1" --version 2>&1 </dev/null)" || true
   sw_tf_text="$(printf '%s\n' "${sw_tf_raw}" | sed -n '1p')"
   sw_tf_version="$(sw_flavor_version "${sw_tf_text}")"
-  sw_tf_os="${SW_OS:-}"
+  sw_tf_os="${SHIWAKE_OS:-}"
   [ -n "${sw_tf_os}" ] || sw_tf_os="$(uname -s)"
   case "${sw_tf_text}" in
   *uutils*) sw_tf_name=uutils ;;
