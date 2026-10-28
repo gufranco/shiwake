@@ -19,7 +19,7 @@
 
 </div>
 
-一条命令，69 个测试，7 个 shell 模块。除了 POSIX 系统，不需要安装任何东西。`shiwake` 是日语「仕分け」，意为分拣：像邮局分拣信件一样，把文件分进各自的格子。姊妹工具 [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome) 和 [yakitsuke](https://github.com/gufranco/yakitsuke) 负责写入磁盘、擦除磁盘和制作 VCD。
+一条命令，67 个测试，7 个 shell 模块。除了 POSIX 系统，不需要安装任何东西。`shiwake` 是日语「仕分け」，意为分拣：像邮局分拣信件一样，把文件分进各自的格子。姊妹工具 [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome) 和 [yakitsuke](https://github.com/gufranco/yakitsuke) 负责写入磁盘、擦除磁盘和制作 VCD。
 
 ---
 
@@ -119,7 +119,7 @@ shiwake --dry-run .              # 查看整理当前文件夹会怎样移动
 | 命令 | 说明 |
 |:--------|:------------|
 | `make lint` | 对所有脚本、测试和补全运行 ShellCheck，用 mandoc 检查 man 手册 |
-| `make test` | 在系统 `sh` 下运行 69 个 `bats` 测试 |
+| `make test` | 在系统 `sh` 下运行 67 个 `bats` 测试 |
 | `make test-all` | 在每种 shell 下运行同样的测试，macOS 上包括 bash 和 zsh 的两个版本 |
 | `make coverage` | bashcov 行覆盖率，以及 CI 强制的 100% 门槛 |
 

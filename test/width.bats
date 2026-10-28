@@ -42,18 +42,6 @@ widest_line() {
   [[ "${widest}" -le 80 ]]
 }
 
-@test "doctor never prints a line wider than 80 columns" {
-  # Arrange
-  local page widest
-
-  # Act
-  page="$(SHIWAKE_TERMINAL=1 sw_test_run doctor || true)"
-
-  # Assert
-  widest="$(printf '%s\n' "${page}" | widest_line)"
-  [[ "${widest}" -le 80 ]]
-}
-
 @test "an error longer than 80 columns wraps between words" {
   # Arrange
   local message="a file named like one of the letter folders is in the way, so it stays where it is and the folder is left alone"
@@ -93,25 +81,12 @@ widest_line() {
   [[ "${lines[1]}" == "        ${folder}" ]]
 }
 
-@test "a doctor row too wide for 80 columns puts its detail on the next line" {
+@test "a doctor row stays on one line on a terminal, however long" {
   # Arrange
-  local found="/opt/homebrew/opt/uutils-coreutils/libexec/uubin/mkdir"
+  local expected="mkdir              ok       /opt/homebrew/opt/uutils-coreutils/libexec/uubin/mkdir, uutils 0.12.0"
 
   # Act
-  SHIWAKE_TERMINAL=1 run sw_test_call sw_doctor_row mkdir ok "${found}, uutils 0.12.0"
-
-  # Assert
-  [[ "${status}" -eq 0 ]]
-  [[ "${lines[0]}" == "mkdir              ok" ]]
-  [[ "${lines[1]}" == "  ${found}, uutils 0.12.0" ]]
-}
-
-@test "a doctor row that fits in 80 columns stays on one line" {
-  # Arrange
-  local expected="mv                 ok       /bin/mv, bsd"
-
-  # Act
-  SHIWAKE_TERMINAL=1 run sw_test_call sw_doctor_row mv ok "/bin/mv, bsd"
+  SHIWAKE_TERMINAL=1 run sw_test_call sw_doctor_row "mkdir" ok "/opt/homebrew/opt/uutils-coreutils/libexec/uubin/mkdir, uutils 0.12.0"
 
   # Assert
   [[ "${status}" -eq 0 ]]

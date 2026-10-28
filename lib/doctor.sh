@@ -4,13 +4,7 @@
 . "${SW_LIB:?}/state.sh"
 
 sw_doctor_row() {
-  sw_dw_line="$(printf '%-18s %-8s %s' "$1" "$2" "$3")"
-  if [ "${#sw_dw_line}" -le "${SW_WIDTH}" ] || ! sw_terminal; then
-    printf '%s\n' "${sw_dw_line}"
-    return 0
-  fi
-  printf '%-18s %s\n' "$1" "$2"
-  printf '  %s\n' "$3" | sw_wrap 2
+  printf '%-18s %-8s %s\n' "$1" "$2" "$3"
 }
 
 sw_flavor_version() {

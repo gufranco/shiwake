@@ -19,7 +19,7 @@ English | [日本語](README.ja.md) | [简体中文](README.zh-Hans.md) | [繁�
 
 </div>
 
-One command, 69 tests, 7 shell modules, and nothing to install beyond a POSIX system. `shiwake` is 仕分け, Japanese for sorting things into their bins, the way a post office sorts letters. Its companions [kakikomi](https://github.com/gufranco/kakikomi), [kiyome](https://github.com/gufranco/kiyome) and [yakitsuke](https://github.com/gufranco/yakitsuke) write disks, wipe disks and burn Video CDs.
+One command, 67 tests, 7 shell modules, and nothing to install beyond a POSIX system. `shiwake` is 仕分け, Japanese for sorting things into their bins, the way a post office sorts letters. Its companions [kakikomi](https://github.com/gufranco/kakikomi), [kiyome](https://github.com/gufranco/kiyome) and [yakitsuke](https://github.com/gufranco/yakitsuke) write disks, wipe disks and burn Video CDs.
 
 ---
 
@@ -117,7 +117,7 @@ Every run works on the five toolsets in common use: Linux with GNU or uutils cor
 | Command | Description |
 |:--------|:------------|
 | `make lint` | ShellCheck on every script, test and completion, and mandoc on the man page |
-| `make test` | The 69 `bats` tests under the system `sh` |
+| `make test` | The 67 `bats` tests under the system `sh` |
 | `make test-all` | The same tests under every shell, both builds of bash and zsh included on macOS |
 | `make coverage` | bashcov line coverage, with the 100% gate CI enforces |
 
