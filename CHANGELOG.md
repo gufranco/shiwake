@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/gufranco/shiwake/compare/v1.1.0...v1.1.1) (2026-10-28)
+
+
+### Bug Fixes
+
+* keep each doctor row on one line ([78872b3](https://github.com/gufranco/shiwake/commit/78872b3c01d9ef76b3a9c8b4df548d4db89af7da))
+
 # [1.1.0](https://github.com/gufranco/shiwake/compare/v1.0.0...v1.1.0) (2026-10-28)
 
 
