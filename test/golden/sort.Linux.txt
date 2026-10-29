@@ -1,0 +1,6 @@
+
+Folder: WORK/target
+Plan:   5 files into 4 folders named for their first letter
+
+shiwake: warning: C/Cherry already exists, so Cherry stays where it is.
+Sorted 4 of 5 files into 3 folders.

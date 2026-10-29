@@ -83,3 +83,17 @@ sw_test_tree() {
   listing="$(cd "$1" && find . -mindepth 1)" || return 1
   LC_ALL=C sort <<<"${listing}"
 }
+
+sw_test_matches_golden() {
+  local name="$1"
+  local actual="$2"
+  local os golden normalized
+  os="$(uname -s)"
+  golden="${SHIWAKE_TESTS_DIR}/golden/${name}.${os}.txt"
+  normalized="${actual//"${WORK}"/WORK}"
+  if [[ "${SHIWAKE_TEST_RECORD:-}" == "1" ]]; then
+    mkdir -p "${SHIWAKE_TESTS_DIR}/golden"
+    printf '%s\n' "${normalized}" >"${golden}"
+  fi
+  diff <(printf '%s\n' "${normalized}") "${golden}"
+}

@@ -1,0 +1,9 @@
+
+Folder: WORK/target
+Plan:   3 files into 3 folders named for their first letter
+        dry run: list each move and change nothing
+
+2048.txt -> #/
+apple -> A/
+banana -> B/
+Dry run: 3 files would move into 3 folders. Nothing was moved.
