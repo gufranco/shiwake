@@ -12,19 +12,19 @@ Guidance for anyone, human or agent, changing shiwake. What shiwake is and how t
 | [`lib/`](lib) | The modules. [`lib/state.sh`](lib/state.sh) declares every global, including the letter folders and their glob patterns |
 | [`man/shiwake.1`](man/shiwake.1) | The man page |
 | [`completions/`](completions) | bash, zsh and fish completions |
-| [`test/`](test) | The `bats` suite, its helpers and the shell matrix runner |
-| [`scripts/`](scripts) | Coverage, the coverage gate, the name check, the toolset helper and the release version stamp |
+| [`test/`](test) | The `bats` suite, its helpers, the golden transcripts, the shell matrix runner and the Linux container script |
+| [`scripts/`](scripts) | Coverage, the coverage gate, the Linux coverage run, the name check, the toolset helper and the release version stamp |
 
 ## Names
 
 - Globals carry `SW_`; function-scoped variables carry a per-function `sw_` prefix.
-- Settings come from `SHIWAKE_<NAME>`; test switches are `SHIWAKE_TERMINAL` and `SHIWAKE_TEST_SHELLS`.
+- Settings come from `SHIWAKE_<NAME>`, such as `SHIWAKE_BATCH`; test switches are `SHIWAKE_TERMINAL`, `SHIWAKE_TEST_SHELLS`, `SHIWAKE_TEST_RECORD` and `SHIWAKE_TEST_IMAGE`.
 - Output goes through `sw_say`, `sw_error` and `sw_warning`.
 
 ## Behaviour
 
 - shiwake has one job, so a bare `shiwake` on a terminal asks for the folder directly, offering the current one.
-- Its only option is `--dry-run`, so the help page has a single `options:` section.
+- Its options are `--dry-run` and `--json`, so the help page has a single `options:` section. `--json` reports the folder, the counts of files found, moved, kept and failed, and how many went into each letter folder.
 - Moving files is not destructive, so it shows its summary block and starts without a typed confirmation.
 
 ## Domain rules
@@ -39,8 +39,4 @@ Guidance for anyone, human or agent, changing shiwake. What shiwake is and how t
 
 ## Gaps against FAMILY.md
 
-As of 2026-10-29, closed in the change that removes each line:
-
-- No `make test-linux`, `test/linux-container.sh` or merged local coverage.
-- No golden transcripts.
-- No `--json` for the moves a run made.
+None (as of 2026-10-29).

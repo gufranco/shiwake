@@ -78,6 +78,7 @@ mv                 ok       /usr/bin/mv, gnu 9.7
 | 选项 | 效果 |
 |:-------|:-------|
 | `--dry-run` | 列出每一次移动，不做任何改动 |
+| `--json` | 以一个 JSON 对象输出结果，供脚本使用 |
 
 ```bash
 shiwake ~/Downloads              # 整理下载文件夹
@@ -117,12 +118,14 @@ shiwake --dry-run .              # 查看整理当前文件夹会怎样移动
 
 | 命令 | 说明 |
 |:--------|:------------|
-| `make lint` | 对所有脚本、测试和补全运行 ShellCheck，用 mandoc 检查 man 手册 |
-| `make test` | 在系统 `sh` 下运行 67 个 `bats` 测试 |
+| `make fmt` | 用 shfmt 格式化所有脚本 |
+| `make lint` | 运行 shfmt，对所有脚本、测试和补全运行 ShellCheck，用 mandoc 检查 man 手册 |
+| `make test` | 在系统 `sh` 下运行 `bats` 测试 |
 | `make test-all` | 在每种 shell 下运行同样的测试，macOS 上包括 bash 和 zsh 的两个版本 |
-| `make coverage` | bashcov 行覆盖率，以及 CI 强制的 100% 门槛 |
+| `make test-linux` | 在 Ubuntu 容器中运行同样的测试 |
+| `make coverage` | 合并这台 Mac 与 Ubuntu 容器中的 bashcov 行覆盖率，以及 CI 强制的 100% 门槛 |
 
-测试在真实文件系统上整理真实的文件夹，只有故障通过 `PATH` 上的小包装程序注入。每次推送到 `main` 都会运行 semantic-release：`feat` 或 `fix` 提交会发布新版本，更新 [`lib/core.sh`](lib/core.sh) 里的 `SHIWAKE_VERSION` 和 CHANGELOG，并更新 Homebrew formula。
+测试在真实文件系统上整理真实的文件夹，只有故障通过 `PATH` 上的小包装程序注入。推送到 `main` 且 CI 通过后会运行 semantic-release：`feat` 或 `fix` 提交会发布新版本，更新 [`lib/core.sh`](lib/core.sh) 里的 `SHIWAKE_VERSION` 和 CHANGELOG，并更新 Homebrew formula。
 
 ## 许可证
 

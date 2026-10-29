@@ -78,6 +78,7 @@ mv                 ok       /usr/bin/mv, gnu 9.7
 | Option | Effect |
 |:-------|:-------|
 | `--dry-run` | List every move and change nothing |
+| `--json` | Print the result as one JSON object, for scripts |
 
 ```bash
 shiwake ~/Downloads              # sort the Downloads folder
@@ -115,12 +116,14 @@ Every run works on the five toolsets in common use: Linux with GNU or uutils cor
 
 | Command | Description |
 |:--------|:------------|
-| `make lint` | ShellCheck on every script, test and completion, and mandoc on the man page |
-| `make test` | The 67 `bats` tests under the system `sh` |
+| `make fmt` | Formats every script with shfmt |
+| `make lint` | shfmt, ShellCheck on every script, test and completion, and mandoc on the man page |
+| `make test` | The `bats` tests under the system `sh` |
 | `make test-all` | The same tests under every shell, both builds of bash and zsh included on macOS |
-| `make coverage` | bashcov line coverage, with the 100% gate CI enforces |
+| `make test-linux` | The same tests in an Ubuntu container |
+| `make coverage` | bashcov line coverage on this Mac and in the Ubuntu container, merged, with the 100% gate CI enforces |
 
-The tests sort real folders on the real filesystem; only failures are injected, through small wrappers on `PATH`. Every push to `main` runs semantic-release: a `feat` or `fix` commit publishes a release, updates `SHIWAKE_VERSION` in [`lib/core.sh`](lib/core.sh) and the CHANGELOG, and bumps the Homebrew formula.
+The tests sort real folders on the real filesystem; only failures are injected, through small wrappers on `PATH`. Once CI passes on a push to `main`, semantic-release runs: a `feat` or `fix` commit publishes a release, updates `SHIWAKE_VERSION` in [`lib/core.sh`](lib/core.sh) and the CHANGELOG, and bumps the Homebrew formula.
 
 ## License
 

@@ -78,6 +78,7 @@ mv                 ok       /usr/bin/mv, gnu 9.7
 | オプション | 効果 |
 |:-------|:-------|
 | `--dry-run` | 移動をすべて一覧表示し、何も変更しません |
+| `--json` | 結果を1つのJSONオブジェクトとして出力します（スクリプト向け） |
 
 ```bash
 shiwake ~/Downloads              # ダウンロードフォルダを仕分ける
@@ -117,12 +118,14 @@ Linux の GNU coreutils と uutils coreutils、macOS 標準のツール、その
 
 | コマンド | 説明 |
 |:--------|:------------|
-| `make lint` | すべてのスクリプト、テスト、補完に ShellCheck、man ページに mandoc |
-| `make test` | システムの `sh` で 67 件の `bats` テスト |
+| `make fmt` | すべてのスクリプトを shfmt で整形 |
+| `make lint` | shfmt、すべてのスクリプト、テスト、補完に ShellCheck、man ページに mandoc |
+| `make test` | システムの `sh` で `bats` テスト |
 | `make test-all` | すべてのシェルで同じテスト。macOS では bash と zsh の両方の版を含みます |
-| `make coverage` | bashcov の行カバレッジと、CI が強制する 100% のゲート |
+| `make test-linux` | Ubuntu コンテナで同じテスト |
+| `make coverage` | この Mac と Ubuntu コンテナでの bashcov の行カバレッジを合算し、CI が強制する 100% のゲート |
 
-テストは実際のファイルシステム上の実際のフォルダを仕分けます。故障だけを `PATH` 上の小さなラッパーで注入します。`main` への push ごとに semantic-release が動き、`feat` か `fix` のコミットでリリースを公開し、[`lib/core.sh`](lib/core.sh) の `SHIWAKE_VERSION` と CHANGELOG を更新し、Homebrew の formula を更新します。
+テストは実際のファイルシステム上の実際のフォルダを仕分けます。故障だけを `PATH` 上の小さなラッパーで注入します。`main` への push で CI が通ると semantic-release が動き、`feat` か `fix` のコミットでリリースを公開し、[`lib/core.sh`](lib/core.sh) の `SHIWAKE_VERSION` と CHANGELOG を更新し、Homebrew の formula を更新します。
 
 ## ライセンス
 
