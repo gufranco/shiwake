@@ -7,8 +7,8 @@ done
 
 sw_self="$0"
 case "${sw_self}" in
-  */*) ;;
-  *) sw_self="$(command -v -- "${sw_self}")" ;;
+*/*) ;;
+*) sw_self="$(command -v -- "${sw_self}")" ;;
 esac
 SW_LIB="$(cd "${sw_self%/*}/../lib" && pwd)" || exit 1
 
@@ -27,10 +27,10 @@ SW_LIB="$(cd "${sw_self%/*}/../lib" && pwd)" || exit 1
 
 sw_main() {
   case "${1:-}" in
-    help | -h | --help) sw_usage ;;
-    version | -V | --version) sw_cli_version ;;
-    doctor) sw_doctor ;;
-    *) sw_start "$@" ;;
+  help | -h | --help) sw_usage ;;
+  version | -V | --version) sw_cli_version ;;
+  doctor) sw_doctor ;;
+  *) sw_start "$@" ;;
   esac
 }
 
