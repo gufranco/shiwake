@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.2.0](https://github.com/gufranco/shiwake/compare/v1.1.1...v1.2.0) (2026-10-29)
+
+
+### Features
+
+* print the result as JSON with --json ([add5cb2](https://github.com/gufranco/shiwake/commit/add5cb219ea76413bd1bd7ef023e835336f59112))
+
 ## [1.1.1](https://github.com/gufranco/shiwake/compare/v1.1.0...v1.1.1) (2026-10-28)
 
 
