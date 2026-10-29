@@ -15,6 +15,7 @@ _shiwake() {
 
   _arguments \
     '--dry-run[list every move and change nothing]' \
+    '--json[print the result as one JSON object, for scripts]' \
     '*:folder:_files -/'
 }
 

@@ -18,6 +18,7 @@ usage:
 
 options:
   --dry-run                    list every move and change nothing
+  --json                       print the result as one JSON object, for scripts
 
 notes:
   A file whose name starts with a letter goes into that letter's folder, A to

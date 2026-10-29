@@ -5,7 +5,7 @@ _shiwake() {
   local cur words
   cur="${COMP_WORDS[COMP_CWORD]}"
   if [[ "${cur}" == -* ]]; then
-    COMPREPLY=($(compgen -W "--dry-run" -- "${cur}"))
+    COMPREPLY=($(compgen -W "--dry-run --json" -- "${cur}"))
     return
   fi
   words="$(compgen -d -- "${cur}" || true)"

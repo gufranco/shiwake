@@ -19,6 +19,7 @@ sw_args_one() {
   case "$1" in
   --) SW_ARGS_DONE=yes ;;
   --dry-run) SW_DRY_RUN=yes ;;
+  --json) SW_JSON=yes ;;
   --*=*)
     sw_cli_hint "unknown option '${1%%=*}'"
     return 1

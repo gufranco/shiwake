@@ -52,6 +52,7 @@ sw_blocked() {
 
 sw_filled() {
   [ "$2" -gt 0 ] || return 0
+  SW_TALLY="${SW_TALLY}$1:$2 "
   [ "${SW_LAST_FILLED}" != "$1" ] || return 0
   SW_FILLED=$((SW_FILLED + 1))
   SW_LAST_FILLED="$1"
@@ -67,9 +68,11 @@ sw_tally() {
 sw_show() {
   sw_sh_bucket="$1"
   shift
-  for sw_sh_file in "$@"; do
-    sw_say 0 "${sw_sh_file} -> ${sw_sh_bucket}/"
-  done
+  if [ "${SW_JSON}" = no ]; then
+    for sw_sh_file in "$@"; do
+      sw_say 0 "${sw_sh_file} -> ${sw_sh_bucket}/"
+    done
+  fi
   SW_MOVED=$((SW_MOVED + $#))
   sw_filled "${sw_sh_bucket}" "$#"
 }
