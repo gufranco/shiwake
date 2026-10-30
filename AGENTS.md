@@ -13,7 +13,8 @@ Guidance for anyone, human or agent, changing shiwake. What shiwake is and how t
 | [`man/shiwake.1`](man/shiwake.1) | The man page |
 | [`completions/`](completions) | bash, zsh and fish completions |
 | [`test/`](test) | The `bats` suite, its helpers, the golden transcripts, the shell matrix runner and the Linux container script |
-| [`scripts/`](scripts) | Coverage, the coverage gate, the Linux coverage run, the name check, the toolset helper and the release version stamp |
+| [`scripts/`](scripts) | Coverage, the coverage gate, the Linux coverage run and the name check, which `make` runs |
+| [`.github/scripts/`](.github/scripts) | The toolset helper and the release version stamp, which only CI and the release run |
 
 ## Names
 
