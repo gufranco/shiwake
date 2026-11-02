@@ -18,15 +18,27 @@ sw_flavor_version() {
   }'
 }
 
+sw_tool_line() {
+  sw_tl_line="$(printf '%s\n' "$1" | awk '/BusyBox|This is not GNU/ { print; exit }')"
+  if [ -z "${sw_tl_line}" ]; then
+    sw_tl_line="$(printf '%s\n' "$1" | sed -n '1p')"
+  fi
+  printf '%s\n' "${sw_tl_line}"
+}
+
 sw_tool_flavor() {
   sw_tf_raw="$("$1" --version 2>&1 </dev/null)" || true
-  sw_tf_text="$(printf '%s\n' "${sw_tf_raw}" | sed -n '1p')"
+  sw_tf_text="$(sw_tool_line "${sw_tf_raw}")"
   sw_tf_version="$(sw_flavor_version "${sw_tf_text}")"
   sw_tf_os="${SHIWAKE_OS:-}"
   [ -n "${sw_tf_os}" ] || sw_tf_os="$(uname -s)"
   case "${sw_tf_text}" in
   *uutils*) sw_tf_name=uutils ;;
   *BusyBox*) sw_tf_name=busybox ;;
+  *"This is not GNU"*)
+    sw_tf_name=busybox
+    sw_tf_version=""
+    ;;
   *GNU* | *"(coreutils)"*) sw_tf_name=gnu ;;
   *)
     sw_tf_version=""
