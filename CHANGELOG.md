@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/gufranco/shiwake/compare/v1.2.0...v1.2.1) (2026-11-02)
+
+
+### Bug Fixes
+
+* read BusyBox from any line of its answer ([867fa5c](https://github.com/gufranco/shiwake/commit/867fa5c9ff43b3bd6dfe7a7aa940bdc087659925))
+
 # [1.2.0](https://github.com/gufranco/shiwake/compare/v1.1.1...v1.2.0) (2026-10-29)
 
 
