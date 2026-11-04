@@ -178,17 +178,17 @@ sw_ui_confirm() {
 }
 
 sw_ui_summary() {
-  sw_us2_lines=""
-  while [ $# -ge 2 ]; do
+  sw_us2_pairs=$(($# / 2))
+  while [ "${sw_us2_pairs}" -gt 0 ]; do
     sw_us2_label=$(printf '%-7s' "$1")
     sw_us2_label=$(sw_ui_ink "${SW_UI_MUTED}" -- "${sw_us2_label}")
     sw_us2_value=$(sw_ui_ink "${SW_UI_TEXT}" --bold -- "$2")
-    sw_us2_lines="${sw_us2_lines}${sw_us2_lines:+
-}${sw_us2_label} ${sw_us2_value}"
     shift 2
+    set -- "$@" "${sw_us2_label} ${sw_us2_value}"
+    sw_us2_pairs=$((sw_us2_pairs - 1))
   done
   printf '\n'
-  sw_gum style --border rounded --border-foreground "${SW_UI_MUTED}" --padding "0 1" -- "${sw_us2_lines}"
+  sw_gum style --border rounded --border-foreground "${SW_UI_MUTED}" --padding "0 1" -- "$@"
   printf '\n'
 }
 
