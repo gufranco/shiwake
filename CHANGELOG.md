@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.1](https://github.com/gufranco/shiwake/compare/v1.3.0...v1.3.1) (2026-11-04)
+
+
+### Bug Fixes
+
+* let the terminal wrap long messages ([173afba](https://github.com/gufranco/shiwake/commit/173afbace60266054aaa573b38bd799120efe35d))
+* **ui:** line up table cells with wide letters ([3d6868d](https://github.com/gufranco/shiwake/commit/3d6868d89882158e688e4bc7db3278a10b7a2b5a))
+
 # [1.3.0](https://github.com/gufranco/shiwake/compare/v1.2.1...v1.3.0) (2026-11-04)
 
 

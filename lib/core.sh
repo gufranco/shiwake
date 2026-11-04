@@ -3,7 +3,7 @@
 # shellcheck source=SCRIPTDIR/state.sh
 . "${SW_LIB:?}/state.sh"
 
-SHIWAKE_VERSION="1.3.0"
+SHIWAKE_VERSION="1.3.1"
 
 sw_version() {
   printf '%s %s\n' "${SW_PROG}" "${SHIWAKE_VERSION}"
