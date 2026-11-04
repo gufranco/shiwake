@@ -24,7 +24,7 @@ sw_summary() {
     return
   fi
   printf '\n'
-  sw_say 8 "Folder: ${SW_DIR}"
+  sw_say "Folder: ${SW_DIR}"
   printf 'Plan:   %s into %s named for their first letter\n' "${sw_su_files}" "${sw_su_folders}"
   if [ "${SW_DRY_RUN}" = yes ]; then
     printf '        dry run: list each move and change nothing\n'
@@ -103,7 +103,7 @@ sw_start() {
   sw_scan tally
   if [ "${SW_FOUND}" -eq 0 ]; then
     [ "${SW_JSON}" = no ] || sw_report_json
-    [ "${SW_JSON}" = yes ] || sw_say 0 "Nothing to sort in ${SW_DIR}."
+    [ "${SW_JSON}" = yes ] || sw_say "Nothing to sort in ${SW_DIR}."
     return 0
   fi
   [ "${SW_JSON}" = yes ] || sw_summary || return 1

@@ -18,7 +18,7 @@
 
 </div>
 
-一條指令，138 個測試，8 個 shell 模組。除了 POSIX 系統和 gum，不需要安裝任何東西。`shiwake` 是日文「仕分け」，意思是分揀：像郵局分揀信件一樣，把檔案分進各自的格子。姊妹工具 [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome) 和 [yakitsuke](https://github.com/gufranco/yakitsuke) 負責寫入磁碟、清除磁碟和製作 VCD。
+一條指令，136 個測試，8 個 shell 模組。除了 POSIX 系統和 gum，不需要安裝任何東西。`shiwake` 是日文「仕分け」，意思是分揀：像郵局分揀信件一樣，把檔案分進各自的格子。姊妹工具 [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome) 和 [yakitsuke](https://github.com/gufranco/yakitsuke) 負責寫入磁碟、清除磁碟和製作 VCD。
 
 ---
 

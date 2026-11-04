@@ -70,7 +70,7 @@ sw_show() {
   shift
   if [ "${SW_JSON}" = no ]; then
     for sw_sh_file in "$@"; do
-      sw_say 0 "${sw_sh_file} -> ${sw_sh_bucket}/"
+      sw_say "${sw_sh_file} -> ${sw_sh_bucket}/"
     done
   fi
   SW_MOVED=$((SW_MOVED + $#))

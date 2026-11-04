@@ -19,7 +19,7 @@ Guidance for anyone, human or agent, changing shiwake. What shiwake is and how t
 ## Names
 
 - Globals carry `SW_`; function-scoped variables carry a per-function `sw_` prefix.
-- Settings come from `SHIWAKE_<NAME>`, such as `SHIWAKE_BATCH`; test switches are `SHIWAKE_TERMINAL`, `SHIWAKE_TEST_SHELLS`, `SHIWAKE_TEST_RECORD`, `SHIWAKE_TEST_IMAGE`, `SHIWAKE_TEST_GUM`, `SHIWAKE_TEST_GUM_LOG`, `SHIWAKE_TEST_GUM_ANSWERS` and `SHIWAKE_TEST_GUM_SPIN`.
+- Settings come from `SHIWAKE_<NAME>`, such as `SHIWAKE_BATCH`; test switches are `SHIWAKE_TEST_SHELLS`, `SHIWAKE_TEST_RECORD`, `SHIWAKE_TEST_IMAGE`, `SHIWAKE_TEST_GUM`, `SHIWAKE_TEST_GUM_LOG`, `SHIWAKE_TEST_GUM_ANSWERS` and `SHIWAKE_TEST_GUM_SPIN`.
 - Output goes through `sw_say`, `sw_error` and `sw_warning`, which hand over to the `sw_ui_` helpers in [`lib/ui.sh`](lib/ui.sh) where gum draws.
 - Where gum draws, a run that moves files asks to confirm after the summary; a dry run and a run without a terminal never ask.
 

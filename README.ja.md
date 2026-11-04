@@ -18,7 +18,7 @@
 
 </div>
 
-コマンドは一つ、テストは 138 件、シェルモジュールは 8 個。POSIX システムと gum 以外に必要なものはありません。`shiwake` は「仕分け」です。郵便局が手紙を振り分けるように、ファイルをそれぞれの箱に振り分けます。姉妹ツールの [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome)、[yakitsuke](https://github.com/gufranco/yakitsuke) は、ディスクの書き込み、ディスクの消去、ビデオ CD の作成を行います。
+コマンドは一つ、テストは 136 件、シェルモジュールは 8 個。POSIX システムと gum 以外に必要なものはありません。`shiwake` は「仕分け」です。郵便局が手紙を振り分けるように、ファイルをそれぞれの箱に振り分けます。姉妹ツールの [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome)、[yakitsuke](https://github.com/gufranco/yakitsuke) は、ディスクの書き込み、ディスクの消去、ビデオ CD の作成を行います。
 
 ---
 

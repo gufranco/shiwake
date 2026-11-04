@@ -18,7 +18,7 @@ English | [日本語](README.ja.md) | [简体中文](README.zh-Hans.md) | [繁�
 
 </div>
 
-One command, 138 tests, 8 shell modules, and nothing to install beyond a POSIX system and gum. `shiwake` is 仕分け, Japanese for sorting things into their bins, the way a post office sorts letters. Its companions [kakikomi](https://github.com/gufranco/kakikomi), [kiyome](https://github.com/gufranco/kiyome) and [yakitsuke](https://github.com/gufranco/yakitsuke) write disks, wipe disks and burn Video CDs.
+One command, 136 tests, 8 shell modules, and nothing to install beyond a POSIX system and gum. `shiwake` is 仕分け, Japanese for sorting things into their bins, the way a post office sorts letters. Its companions [kakikomi](https://github.com/gufranco/kakikomi), [kiyome](https://github.com/gufranco/kiyome) and [yakitsuke](https://github.com/gufranco/yakitsuke) write disks, wipe disks and burn Video CDs.
 
 ---
 

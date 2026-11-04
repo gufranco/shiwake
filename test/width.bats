@@ -23,7 +23,7 @@ widest_line() {
   local page widest
 
   # Act
-  page="$(SHIWAKE_TERMINAL=1 sw_test_run help)"
+  page="$(sw_test_run help)"
 
   # Assert
   widest="$(printf '%s\n' "${page}" | widest_line)"
@@ -35,28 +35,14 @@ widest_line() {
   local page widest
 
   # Act
-  page="$(SHIWAKE_TERMINAL=1 sw_test_run version)"
+  page="$(sw_test_run version)"
 
   # Assert
   widest="$(printf '%s\n' "${page}" | widest_line)"
   [[ "${widest}" -le 80 ]]
 }
 
-@test "an error longer than 80 columns wraps between words" {
-  # Arrange
-  local message="a file named like one of the letter folders is in the way, so it stays where it is and the folder is left alone"
-
-  # Act
-  SHIWAKE_TERMINAL=1 run sw_test_call sw_error "${message}"
-
-  # Assert
-  [[ "${status}" -eq 0 ]]
-  [[ "${#lines[@]}" -eq 2 ]]
-  [[ "${lines[0]}" == "shiwake: a file named like one of the letter folders is in the way, so it stays" ]]
-  [[ "${lines[1]}" == "where it is and the folder is left alone" ]]
-}
-
-@test "an error sent to a pipe stays on one line, however long" {
+@test "an error stays on one line, however long" {
   # Arrange
   local message="a file named like one of the letter folders is in the way, so it stays where it is and the folder is left alone"
 
@@ -68,25 +54,12 @@ widest_line() {
   [[ "${output}" == "shiwake: ${message}" ]]
 }
 
-@test "a word wider than 80 columns stays whole on its own line" {
-  # Arrange
-  local folder="/Volumes/Archive/Scans/Every-Letter-Ever-Received-From-The-Family-1968-To-1985"
-
-  # Act
-  SHIWAKE_TERMINAL=1 run sw_test_call sw_say 8 "Folder: ${folder}"
-
-  # Assert
-  [[ "${status}" -eq 0 ]]
-  [[ "${lines[0]}" == "Folder:" ]]
-  [[ "${lines[1]}" == "        ${folder}" ]]
-}
-
-@test "a doctor row stays on one line on a terminal, however long" {
+@test "a doctor row stays on one line, however long" {
   # Arrange
   local expected="mkdir              ok       /opt/homebrew/opt/uutils-coreutils/libexec/uubin/mkdir, uutils 0.12.0"
 
   # Act
-  SHIWAKE_TERMINAL=1 run sw_test_call sw_doctor_row "mkdir" ok "/opt/homebrew/opt/uutils-coreutils/libexec/uubin/mkdir, uutils 0.12.0"
+  run sw_test_call sw_doctor_row "mkdir" ok "/opt/homebrew/opt/uutils-coreutils/libexec/uubin/mkdir, uutils 0.12.0"
 
   # Assert
   [[ "${status}" -eq 0 ]]

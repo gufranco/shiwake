@@ -134,14 +134,8 @@ sw_ui_log() {
   WARN) sw_ul_colour="${SW_UI_WARN}" ;;
   *) sw_ul_colour="${SW_UI_OK}" ;;
   esac
-  sw_ul_lines=$(printf '%s shiwake: %s\n' "${sw_ul_level}" "${sw_ul_text}" | sw_wrap 2)
-  sw_ul_first=$(printf '%s\n' "${sw_ul_lines}" | sed -n '1p')
-  sw_ul_rest=$(printf '%s\n' "${sw_ul_lines}" | sed '1d')
   sw_ul_label=$(sw_ui_ink "${sw_ul_colour}" --bold -- "${sw_ul_level}")
-  printf '%s%s\n' "${sw_ul_label}" "${sw_ul_first#"${sw_ul_level}"}" >&2
-  if [ -n "${sw_ul_rest}" ]; then
-    printf '%s\n' "${sw_ul_rest}" >&2
-  fi
+  printf '%s shiwake: %s\n' "${sw_ul_label}" "${sw_ul_text}" >&2
 }
 
 sw_ui_choose() {

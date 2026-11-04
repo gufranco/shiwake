@@ -5,7 +5,6 @@ export LC_ALL
 
 : "${SW_LIB:=}"
 : "${SW_PROG:=shiwake}"
-: "${SW_WIDTH:=80}"
 : "${SW_DIR:=}"
 : "${SW_DRY_RUN:=no}"
 : "${SW_JSON:=no}"
