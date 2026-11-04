@@ -218,7 +218,7 @@ sw_ui_table() {
 }
 
 sw_ui_table_body() {
-  awk -F '\t' -v acc="${SW_UI_ACCENT}" -v ok="${SW_UI_OK}" -v warn="${SW_UI_WARN}" \
+  LC_ALL=C awk -F '\t' -v acc="${SW_UI_ACCENT}" -v ok="${SW_UI_OK}" -v warn="${SW_UI_WARN}" \
     -v bad="${SW_UI_ERR}" -v txt="${SW_UI_TEXT}" -v mut="${SW_UI_MUTED}" -v dash="$1" \
     -f "${SW_LIB}/table.awk"
 }
