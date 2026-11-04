@@ -96,8 +96,9 @@ from_folder() {
 
   # Assert
   [[ "${status}" -eq 0 ]]
-  [[ "${lines[0]}" == "mkdir              ok       "* ]]
-  [[ "${lines[1]}" == "mv                 ok       ${mv_path}, "* ]]
+  [[ "${lines[0]}" == "gum                ok       "* ]]
+  [[ "${lines[1]}" == "mkdir              ok       "* ]]
+  [[ "${lines[2]}" == "mv                 ok       ${mv_path}, "* ]]
 }
 
 @test "doctor fails and names a missing mv" {

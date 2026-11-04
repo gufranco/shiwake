@@ -18,9 +18,13 @@
 
 </div>
 
-一條指令，67 個測試，7 個 shell 模組。除了 POSIX 系統，不需要安裝任何東西。`shiwake` 是日文「仕分け」，意思是分揀：像郵局分揀信件一樣，把檔案分進各自的格子。姊妹工具 [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome) 和 [yakitsuke](https://github.com/gufranco/yakitsuke) 負責寫入磁碟、清除磁碟和製作 VCD。
+一條指令，138 個測試，8 個 shell 模組。除了 POSIX 系統和 gum，不需要安裝任何東西。`shiwake` 是日文「仕分け」，意思是分揀：像郵局分揀信件一樣，把檔案分進各自的格子。姊妹工具 [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome) 和 [yakitsuke](https://github.com/gufranco/yakitsuke) 負責寫入磁碟、清除磁碟和製作 VCD。
 
 ---
+
+<p align="center">
+  <img src="screens/hero.gif" alt="在終端機中執行的 shiwake：由第一個輸入到結果" width="800">
+</p>
 
 ```console
 $ shiwake ~/Downloads
@@ -40,6 +44,7 @@ Sorted 6 of 7 files into 4 folders.
 
 | 工具 | 用途 | 安裝 |
 |:-----|:----|:--------|
+| [`gum`](https://github.com/charmbracelet/gum) | 終端介面：選單、輸入、表格及配色 | `brew install gum`。Homebrew formula 會自動安裝 |
 | `mkdir`、`mv` | 建立字母資料夾並移動檔案 | Linux 和 macOS 均已內置 |
 
 ### 安裝
@@ -62,6 +67,7 @@ make install
 
 ```console
 $ shiwake doctor
+gum                ok       /opt/homebrew/bin/gum, 2.0.2
 mkdir              ok       /usr/bin/mkdir, uutils 0.10.0
 mv                 ok       /usr/bin/mv, gnu 9.7
 ```
@@ -79,6 +85,7 @@ mv                 ok       /usr/bin/mv, gnu 9.7
 |:-------|:-------|
 | `--dry-run` | 列出每一次移動，不作任何改動 |
 | `--json` | 以一個 JSON 物件輸出結果，供程式腳本使用 |
+| `--theme <name>` | 終端介面的配色 |
 
 ```bash
 shiwake ~/Downloads              # 整理下載資料夾
@@ -86,6 +93,14 @@ shiwake --dry-run .              # 查看整理目前的資料夾會怎樣移動
 ```
 
 `--` 表示選項結束，所以 `shiwake -- -old` 會整理名為 `-old` 的資料夾。shiwake 遵循同系列工具共用的命令列約定，詳見 [FAMILY.md](FAMILY.md)。
+
+### 主題
+
+在裝有 `gum` 的終端機上，shiwake 用 gum 繪製選單、輸入、表格及訊息；在管道或指令碼中，輸出仍是純文字。配色依次由 `--theme`、`SHIWAKE_THEME`、`KODOUGU_THEME` 決定，最後一個由所有 kodougu 工具共用：`kodougu`（預設）、`catppuccin-mocha`、`catppuccin-latte`、`dracula`、`nord`、`gruvbox`、`tokyo-night` 或 `mono`。`KODOUGU_ACCENT=#RRGGBB` 只取代強調色，`NO_COLOR` 關閉顏色。
+
+```bash
+export KODOUGU_THEME=catppuccin-mocha
+```
 
 <a id="how-files-are-sorted"></a>
 
@@ -112,6 +127,35 @@ shiwake --dry-run .              # 查看整理目前的資料夾會怎樣移動
 
 它能在五種常用工具集上執行：Linux 上的 GNU 或 uutils coreutils，以及 macOS 內置的工具、Homebrew 中較新的版本或 Homebrew 的 uutils 工具。macOS 內置而 Homebrew 有較新版本的工具，包括 bash 和 zsh，兩個版本都會測試。CI 在每種工具集上執行全部測試，`shiwake doctor` 會列出 `mkdir` 和 `mv` 的類型和版本，例如 `gnu 9.7`、`uutils 0.12.0` 或 `bsd`，讓錯誤報告說明用的是哪些工具。
 
+<a id="screens"></a>
+
+## 畫面
+
+<details>
+<summary>全部畫面，均由 <code>make screens</code> 錄自真實執行</summary>
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top"><img src="screens/prompt.png" alt="shiwake: 標題下的第一個輸入"><br><sub>標題下的第一個輸入</sub></td>
+<td width="50%" valign="top"><img src="screens/confirm.png" alt="shiwake: 概要與確認"><br><sub>概要與確認</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/result.png" alt="shiwake: 結果"><br><sub>結果</sub></td>
+<td width="50%" valign="top"><img src="screens/dry-run.png" alt="shiwake: 不作任何更改的試運行"><br><sub>不作任何更改的試運行</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/error.png" alt="shiwake: 錯誤"><br><sub>錯誤</sub></td>
+<td width="50%" valign="top"><img src="screens/doctor.png" alt="shiwake: doctor 檢查所需的每個工具"><br><sub>doctor 檢查所需的每個工具</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/themes.png" alt="shiwake: 六種主題下的版本標記"><br><sub>六種主題下的版本標記</sub></td>
+<td width="50%" valign="top"><img src="screens/help.png" alt="shiwake: 說明頁"><br><sub>說明頁</sub></td>
+</tr>
+</table>
+
+</details>
+
 <a id="development"></a>
 
 ## 開發
@@ -124,6 +168,7 @@ shiwake --dry-run .              # 查看整理目前的資料夾會怎樣移動
 | `make test-all` | 在每種 shell 下執行同樣的測試，macOS 上包括 bash 和 zsh 的兩個版本 |
 | `make test-linux` | 在 Ubuntu 容器中執行同樣的測試 |
 | `make coverage` | 合併這部 Mac 與 Ubuntu 容器中的 bashcov 行覆蓋率，以及 CI 強制的 100% 門檻 |
+| `make screens` | 在 macOS 上用 VHS 從真實工具錄製 README 的畫面 |
 
 測試在真實檔案系統上整理真實的資料夾，只有故障透過 `PATH` 上的小包裝程式注入。推送到 `main` 且 CI 通過後會執行 semantic-release：`feat` 或 `fix` 提交會發佈新版本，更新 [`lib/core.sh`](lib/core.sh) 裡的 `SHIWAKE_VERSION` 和 CHANGELOG，並更新 Homebrew formula。
 

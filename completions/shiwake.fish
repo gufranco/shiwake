@@ -6,3 +6,4 @@ complete -c shiwake -a '(__fish_complete_directories)'
 
 complete -c shiwake -l dry-run -d 'list every move and change nothing'
 complete -c shiwake -l json -d 'print the result as one JSON object, for scripts'
+complete -c shiwake -l theme -r -a 'kodougu catppuccin-mocha catppuccin-latte dracula nord gruvbox tokyo-night mono' -d 'colours of the terminal interface'

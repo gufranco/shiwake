@@ -18,9 +18,13 @@ English | [日本語](README.ja.md) | [简体中文](README.zh-Hans.md) | [繁�
 
 </div>
 
-One command, 67 tests, 7 shell modules, and nothing to install beyond a POSIX system. `shiwake` is 仕分け, Japanese for sorting things into their bins, the way a post office sorts letters. Its companions [kakikomi](https://github.com/gufranco/kakikomi), [kiyome](https://github.com/gufranco/kiyome) and [yakitsuke](https://github.com/gufranco/yakitsuke) write disks, wipe disks and burn Video CDs.
+One command, 138 tests, 8 shell modules, and nothing to install beyond a POSIX system and gum. `shiwake` is 仕分け, Japanese for sorting things into their bins, the way a post office sorts letters. Its companions [kakikomi](https://github.com/gufranco/kakikomi), [kiyome](https://github.com/gufranco/kiyome) and [yakitsuke](https://github.com/gufranco/yakitsuke) write disks, wipe disks and burn Video CDs.
 
 ---
+
+<p align="center">
+  <img src="screens/hero.gif" alt="shiwake running in a terminal, from the first prompt to the result" width="800">
+</p>
 
 ```console
 $ shiwake ~/Downloads
@@ -40,6 +44,7 @@ Sorted 6 of 7 files into 4 folders.
 
 | Tool | Why | Install |
 |:-----|:----|:--------|
+| [`gum`](https://github.com/charmbracelet/gum) | The terminal interface: menus, prompts, tables and colours | `brew install gum`. Installed automatically by the Homebrew formula |
 | `mkdir`, `mv` | Make the letter folders and move the files | Part of every Linux and macOS system |
 
 ### Install
@@ -62,6 +67,7 @@ make install
 
 ```console
 $ shiwake doctor
+gum                ok       /opt/homebrew/bin/gum, 2.0.2
 mkdir              ok       /usr/bin/mkdir, uutils 0.10.0
 mv                 ok       /usr/bin/mv, gnu 9.7
 ```
@@ -79,6 +85,7 @@ mv                 ok       /usr/bin/mv, gnu 9.7
 |:-------|:-------|
 | `--dry-run` | List every move and change nothing |
 | `--json` | Print the result as one JSON object, for scripts |
+| `--theme <name>` | Colours of the terminal interface |
 
 ```bash
 shiwake ~/Downloads              # sort the Downloads folder
@@ -86,6 +93,14 @@ shiwake --dry-run .              # see what sorting the current folder would do
 ```
 
 `--` ends the options, so `shiwake -- -old` sorts a folder named `-old`. shiwake follows the shared command-line contract of its family, described in [FAMILY.md](FAMILY.md).
+
+### Themes
+
+On a terminal with `gum` installed, shiwake draws its menus, prompts, tables and messages with gum; in a pipe or a script the output stays plain text. `--theme`, else `SHIWAKE_THEME`, else `KODOUGU_THEME` picks the colours, the last one shared by every kodougu tool: `kodougu` (default), `catppuccin-mocha`, `catppuccin-latte`, `dracula`, `nord`, `gruvbox`, `tokyo-night` or `mono`. `KODOUGU_ACCENT=#RRGGBB` replaces only the accent, and `NO_COLOR` turns colour off.
+
+```bash
+export KODOUGU_THEME=catppuccin-mocha
+```
 
 <a id="how-files-are-sorted"></a>
 
@@ -110,6 +125,35 @@ Everything is POSIX `sh` with ShellCheck `-o all` at zero findings. The suites r
 
 Every run works on the five toolsets in common use: Linux with GNU or uutils coreutils, and macOS with the tools it ships, Homebrew's newer builds of them, or Homebrew's uutils tools. Every tool macOS ships that Homebrew also builds newer, bash and zsh included, is tested in both builds. CI runs the whole suite on each, and `shiwake doctor` names the flavor and version of `mkdir` and `mv`, such as `gnu 9.7`, `uutils 0.12.0` or `bsd`, so a bug report says which tools ran.
 
+<a id="screens"></a>
+
+## Screens
+
+<details>
+<summary>Every screen, recorded from a real run with <code>make screens</code></summary>
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top"><img src="screens/prompt.png" alt="shiwake: The first prompt, under the header"><br><sub>The first prompt, under the header</sub></td>
+<td width="50%" valign="top"><img src="screens/confirm.png" alt="shiwake: The summary, then the confirmation"><br><sub>The summary, then the confirmation</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/result.png" alt="shiwake: The result"><br><sub>The result</sub></td>
+<td width="50%" valign="top"><img src="screens/dry-run.png" alt="shiwake: A dry run, changing nothing"><br><sub>A dry run, changing nothing</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/error.png" alt="shiwake: An error"><br><sub>An error</sub></td>
+<td width="50%" valign="top"><img src="screens/doctor.png" alt="shiwake: doctor checks every tool it needs"><br><sub>doctor checks every tool it needs</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/themes.png" alt="shiwake: The version badge in six themes"><br><sub>The version badge in six themes</sub></td>
+<td width="50%" valign="top"><img src="screens/help.png" alt="shiwake: The help page"><br><sub>The help page</sub></td>
+</tr>
+</table>
+
+</details>
+
 <a id="development"></a>
 
 ## Development
@@ -122,6 +166,7 @@ Every run works on the five toolsets in common use: Linux with GNU or uutils cor
 | `make test-all` | The same tests under every shell, both builds of bash and zsh included on macOS |
 | `make test-linux` | The same tests in an Ubuntu container |
 | `make coverage` | bashcov line coverage on this Mac and in the Ubuntu container, merged, with the 100% gate CI enforces |
+| `make screens` | Record the README screens from the real tool with VHS, on macOS |
 
 The tests sort real folders on the real filesystem; only failures are injected, through small wrappers on `PATH`. Once CI passes on a push to `main`, semantic-release runs: a `feat` or `fix` commit publishes a release, updates `SHIWAKE_VERSION` in [`lib/core.sh`](lib/core.sh) and the CHANGELOG, and bumps the Homebrew formula.
 

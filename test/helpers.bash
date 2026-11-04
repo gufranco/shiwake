@@ -3,6 +3,8 @@
 SHIWAKE_TESTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_DIR="$(cd "${SHIWAKE_TESTS_DIR}/.." && pwd)"
 export SHIWAKE_TESTS_DIR REPO_DIR
+PATH="${SHIWAKE_TESTS_DIR}/bin:${PATH}"
+export PATH
 
 sw_test_path() {
   if [[ -n "${SHIMS:-}" && -d "${SHIMS}" ]]; then

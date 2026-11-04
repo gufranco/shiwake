@@ -18,9 +18,13 @@
 
 </div>
 
-コマンドは一つ、テストは 67 件、シェルモジュールは 7 個。POSIX システム以外に必要なものはありません。`shiwake` は「仕分け」です。郵便局が手紙を振り分けるように、ファイルをそれぞれの箱に振り分けます。姉妹ツールの [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome)、[yakitsuke](https://github.com/gufranco/yakitsuke) は、ディスクの書き込み、ディスクの消去、ビデオ CD の作成を行います。
+コマンドは一つ、テストは 138 件、シェルモジュールは 8 個。POSIX システムと gum 以外に必要なものはありません。`shiwake` は「仕分け」です。郵便局が手紙を振り分けるように、ファイルをそれぞれの箱に振り分けます。姉妹ツールの [kakikomi](https://github.com/gufranco/kakikomi)、[kiyome](https://github.com/gufranco/kiyome)、[yakitsuke](https://github.com/gufranco/yakitsuke) は、ディスクの書き込み、ディスクの消去、ビデオ CD の作成を行います。
 
 ---
+
+<p align="center">
+  <img src="screens/hero.gif" alt="ターミナルで実行した shiwake：最初の入力から結果まで" width="800">
+</p>
 
 ```console
 $ shiwake ~/Downloads
@@ -40,6 +44,7 @@ Sorted 6 of 7 files into 4 folders.
 
 | ツール | 用途 | インストール |
 |:-----|:----|:--------|
+| [`gum`](https://github.com/charmbracelet/gum) | 端末の画面：メニュー、入力、表、配色 | `brew install gum`。Homebrewのformulaが自動でインストールします |
 | `mkdir`、`mv` | 文字ごとのフォルダを作り、ファイルを移動 | Linux と macOS に標準で入っています |
 
 ### インストール
@@ -62,6 +67,7 @@ make install
 
 ```console
 $ shiwake doctor
+gum                ok       /opt/homebrew/bin/gum, 2.0.2
 mkdir              ok       /usr/bin/mkdir, uutils 0.10.0
 mv                 ok       /usr/bin/mv, gnu 9.7
 ```
@@ -79,6 +85,7 @@ mv                 ok       /usr/bin/mv, gnu 9.7
 |:-------|:-------|
 | `--dry-run` | 移動をすべて一覧表示し、何も変更しません |
 | `--json` | 結果を1つのJSONオブジェクトとして出力します（スクリプト向け） |
+| `--theme <name>` | 端末の画面の配色 |
 
 ```bash
 shiwake ~/Downloads              # ダウンロードフォルダを仕分ける
@@ -86,6 +93,14 @@ shiwake --dry-run .              # 現在のフォルダを仕分けた場合の
 ```
 
 `--` でオプションが終わるので、`shiwake -- -old` は `-old` という名前のフォルダを仕分けます。shiwake は姉妹ツールと共通のコマンドライン規約に従います。規約は [FAMILY.md](FAMILY.md) にあります。
+
+### テーマ
+
+`gum`がインストールされた端末では、shiwakeはメニュー、入力、表、メッセージをgumで描きます。パイプやスクリプトでは、出力はプレーンテキストのままです。配色は`--theme`、なければ`SHIWAKE_THEME`、なければ`KODOUGU_THEME`で選びます。最後のものはkodouguのすべてのツールが共有します：`kodougu` （既定）、`catppuccin-mocha`、`catppuccin-latte`、`dracula`、`nord`、`gruvbox`、`tokyo-night`、`mono`。`KODOUGU_ACCENT=#RRGGBB`はアクセント色だけを置き換え、`NO_COLOR`は色を消します。
+
+```bash
+export KODOUGU_THEME=catppuccin-mocha
+```
 
 <a id="how-files-are-sorted"></a>
 
@@ -112,6 +127,35 @@ shiwake --dry-run .              # 現在のフォルダを仕分けた場合の
 
 Linux の GNU coreutils と uutils coreutils、macOS 標準のツール、その新しい Homebrew 版、Homebrew の uutils ツールという、よく使われる 5 つのツールセットのどれでも動きます。macOS 標準のツールのうち Homebrew に新しい版があるものは、bash と zsh も含めて、両方の版でテストします。CI はそれぞれで全テストを実行し、`shiwake doctor` は `mkdir` と `mv` の系統とバージョン（`gnu 9.7`、`uutils 0.12.0`、`bsd` など）を表示するので、不具合報告でどのツールが動いたかが分かります。
 
+<a id="screens"></a>
+
+## 画面
+
+<details>
+<summary><code>make screens</code> で実際の実行から録画したすべての画面</summary>
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top"><img src="screens/prompt.png" alt="shiwake: ヘッダーの下の最初の入力"><br><sub>ヘッダーの下の最初の入力</sub></td>
+<td width="50%" valign="top"><img src="screens/confirm.png" alt="shiwake: 概要と確認"><br><sub>概要と確認</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/result.png" alt="shiwake: 結果"><br><sub>結果</sub></td>
+<td width="50%" valign="top"><img src="screens/dry-run.png" alt="shiwake: 何も変えないドライラン"><br><sub>何も変えないドライラン</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/error.png" alt="shiwake: エラー"><br><sub>エラー</sub></td>
+<td width="50%" valign="top"><img src="screens/doctor.png" alt="shiwake: doctor が必要なツールをすべて確認"><br><sub>doctor が必要なツールをすべて確認</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="screens/themes.png" alt="shiwake: 6 つのテーマでのバージョン表示"><br><sub>6 つのテーマでのバージョン表示</sub></td>
+<td width="50%" valign="top"><img src="screens/help.png" alt="shiwake: ヘルプ"><br><sub>ヘルプ</sub></td>
+</tr>
+</table>
+
+</details>
+
 <a id="development"></a>
 
 ## 開発
@@ -124,6 +168,7 @@ Linux の GNU coreutils と uutils coreutils、macOS 標準のツール、その
 | `make test-all` | すべてのシェルで同じテスト。macOS では bash と zsh の両方の版を含みます |
 | `make test-linux` | Ubuntu コンテナで同じテスト |
 | `make coverage` | この Mac と Ubuntu コンテナでの bashcov の行カバレッジを合算し、CI が強制する 100% のゲート |
+| `make screens` | macOS で、README の画面を実物のツールから VHS で録画します |
 
 テストは実際のファイルシステム上の実際のフォルダを仕分けます。故障だけを `PATH` 上の小さなラッパーで注入します。`main` への push で CI が通ると semantic-release が動き、`feat` か `fix` のコミットでリリースを公開し、[`lib/core.sh`](lib/core.sh) の `SHIWAKE_VERSION` と CHANGELOG を更新し、Homebrew の formula を更新します。
 

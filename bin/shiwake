@@ -14,6 +14,8 @@ SW_LIB="$(cd "${sw_self%/*}/../lib" && pwd)" || exit 1
 
 # shellcheck source=SCRIPTDIR/../lib/core.sh
 . "${SW_LIB}/core.sh"
+# shellcheck source=SCRIPTDIR/../lib/ui.sh
+. "${SW_LIB}/ui.sh"
 # shellcheck source=SCRIPTDIR/../lib/cli.sh
 . "${SW_LIB}/cli.sh"
 # shellcheck source=SCRIPTDIR/../lib/doctor.sh
@@ -26,6 +28,44 @@ SW_LIB="$(cd "${sw_self%/*}/../lib" && pwd)" || exit 1
 . "${SW_LIB}/run.sh"
 
 sw_main() {
+  sw_mn_count=$#
+  sw_mn_literal=no
+  while [ "${sw_mn_count}" -gt 0 ]; do
+    sw_mn_arg="$1"
+    shift
+    sw_mn_count=$((sw_mn_count - 1))
+    case "${sw_mn_literal}:${sw_mn_arg}" in
+    no:--) sw_mn_literal=yes ;;
+    no:--theme=*)
+      SW_THEME="${sw_mn_arg#--theme=}"
+      continue
+      ;;
+    no:--theme)
+      [ "${sw_mn_count}" -gt 0 ] || sw_main_stop "option '--theme' needs a value"
+      SW_THEME="$1"
+      shift
+      sw_mn_count=$((sw_mn_count - 1))
+      continue
+      ;;
+    *) ;;
+    esac
+    set -- "$@" "${sw_mn_arg}"
+  done
+  sw_ui_setup || sw_main_fail "${SW_UI_PROBLEM}"
+  sw_dispatch "$@"
+}
+
+sw_main_stop() {
+  sw_cli_hint "$1"
+  exit 1
+}
+
+sw_main_fail() {
+  sw_error "$1"
+  exit 1
+}
+
+sw_dispatch() {
   case "${1:-}" in
   help | -h | --help) sw_usage ;;
   version | -V | --version) sw_cli_version ;;

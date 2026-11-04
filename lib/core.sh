@@ -47,10 +47,18 @@ sw_say() {
 }
 
 sw_warning() {
+  if sw_ui_err; then
+    sw_ui_log WARN "$*"
+    return 0
+  fi
   sw_say 0 "${SW_PROG}: warning: $*" >&2
 }
 
 sw_error() {
+  if sw_ui_err; then
+    sw_ui_log ERROR "$*"
+    return 0
+  fi
   sw_say 0 "${SW_PROG}: $*" >&2
 }
 

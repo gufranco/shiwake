@@ -4,7 +4,38 @@
 . "${SW_LIB:?}/state.sh"
 
 sw_doctor_row() {
+  if sw_ui_out; then
+    case "$2" in
+    ok) sw_dw_state="@ok:ok" ;;
+    *) sw_dw_state="@bad:$2" ;;
+    esac
+    SW_DOCTOR_ROWS="${SW_DOCTOR_ROWS}$1	${sw_dw_state}	$3
+"
+    return 0
+  fi
   printf '%-18s %-8s %s\n' "$1" "$2" "$3"
+}
+
+sw_doctor_report() {
+  if ! sw_ui_out; then
+    return 0
+  fi
+  printf 'Tool\tState\tDetail\n%s' "${SW_DOCTOR_ROWS}" | sw_ui_table
+  if [ "$1" -ne 0 ]; then
+    sw_ui_log ERROR "a required tool is missing. install it and run shiwake doctor again."
+    return 0
+  fi
+  sw_ui_done "Ready. Every tool shiwake needs is here."
+}
+
+sw_doctor_gum() {
+  sw_dg_found="$(command -v gum 2>/dev/null || true)"
+  if [ -z "${sw_dg_found}" ]; then
+    sw_doctor_row gum missing "install with: brew install gum, or see https://github.com/charmbracelet/gum"
+    return 1
+  fi
+  sw_dg_version="$(sw_flavor_version "$(gum --version 2>/dev/null || true)")"
+  sw_doctor_row gum ok "${sw_dg_found}${sw_dg_version:+, ${sw_dg_version}}"
 }
 
 sw_flavor_version() {
@@ -64,7 +95,9 @@ sw_doctor_tool() {
 
 sw_doctor() {
   sw_dr_status=0
+  sw_doctor_gum || sw_dr_status=1
   sw_doctor_tool mkdir || sw_dr_status=1
   sw_doctor_tool mv || sw_dr_status=1
+  sw_doctor_report "${sw_dr_status}"
   return "${sw_dr_status}"
 }

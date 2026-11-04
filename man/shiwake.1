@@ -53,11 +53,44 @@ List every move and change nothing.
 Print the result as one JSON object on stdout, for scripts: the folder,
 whether it was a dry run, the counts of files found, moved, kept and failed,
 and how many went into each letter folder.
+.TP
+.BI \-\-theme " name"
+Colours of the terminal interface:
+.BR kodougu ,
+.BR catppuccin\-mocha ,
+.BR catppuccin\-latte ,
+.BR dracula ,
+.BR nord ,
+.BR gruvbox ,
+.B tokyo\-night
+or
+.BR mono .
+The default is
+.BR kodougu .
 .PP
 .B \-\-
 ends the options. A folder named help, doctor or version is sorted by giving
 its path, such as
 .IR ./help .
+.SH ENVIRONMENT
+.TP
+.B SHIWAKE_THEME
+The theme when
+.B \-\-theme
+is not given.
+.TP
+.B KODOUGU_THEME
+The theme of every kodougu tool, when neither
+.B \-\-theme
+nor
+.B SHIWAKE_THEME
+is set.
+.TP
+.B KODOUGU_ACCENT
+A colour such as #CBA6F7 that replaces the accent of the theme.
+.TP
+.B NO_COLOR
+Turns colour off in every theme.
 .SH EXIT STATUS
 0 when every file that could move did, including runs where some files stayed
 because their folder already holds a file of the same name. 1 when a file
