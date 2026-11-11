@@ -26,6 +26,8 @@ lint:
 	shellcheck -x -o all test/*.bash test/*.bats
 	shellcheck -s bash -o all completions/shiwake.bash
 	mandoc -T lint man/shiwake.1
+	yamllint -s -c .yamllint.yml .github .yamllint.yml
+	actionlint
 
 test:
 	SHIWAKE_TEST_SHELLS=sh sh test/run-matrix.sh
